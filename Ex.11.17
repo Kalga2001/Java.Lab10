@@ -1,0 +1,73 @@
+package com.company;
+import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.lang.Exception;
+
+class ExceptionA extends Exception //NullPointer Exception
+{
+    void print(String s) {
+        if (s == null) {
+            throw new NullPointerException("Exception: s is null!");
+        }
+        System.out.println("Работа метода: " + s);
+    }
+}
+
+class ExceptionB extends Exception
+{
+    public void Input(String s) throws IOException {
+         s = null;
+        try(BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))){
+            s = reader.readLine();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        if (s.equals("")){
+            throw new IOException("Строка не может быть создана");
+        }
+        System.out.println(s);
+    }
+}
+
+
+class Main{
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        ExceptionA print = new ExceptionA();
+         String Array[]=new String[]{"first",null,"six","five","four"};
+
+         for (String s:Array) {
+            try {
+                print.print(s);
+            }
+            catch (NullPointerException e) {
+                System.out.println(e.getMessage());
+                System.out.println("Исключение обрабатывается.Продолжаем программу...");
+            }
+            finally {
+                System.out.println("Внутри блока finally");
+            }
+            System.out.println("-----------------");
+        }
+
+
+            ExceptionB ex=new ExceptionB();
+
+         try {
+             System.out.print("Введите строку: ");
+                ex.Input("");
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage());
+                System.out.println("Исключение обрабатывается.Продолжаем программу...");
+            }
+            finally {
+                System.out.println("Внутри блока finally");
+            }
+            System.out.println("-----------------");
+        }
+
+
+        }
