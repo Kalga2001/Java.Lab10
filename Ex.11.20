@@ -1,0 +1,43 @@
+package com.company;
+import java.util.Scanner;
+
+class MyException {
+    int SomeMethod()throws ArithmeticException
+    {
+        MyException ob1=new MyException();
+        int a=12,b=0;
+        int c=ob1.SomeMethod2(a,b);
+        return c;
+    }
+    int SomeMethod2(int a,int b)
+    {
+        int c1=a/b;
+        return c1;
+    }
+}
+
+class Main{
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+            int a ;
+            try
+            {
+                a=Integer.parseInt(args[0]);
+                MyException ob=new MyException();
+                int cat=ob.SomeMethod();
+                if(a>50)
+                    throw ( new ArithmeticException("......myMessage...... \n The number is greater than 50"));
+                System.out.println("no is less then 50  ="+a);
+            }
+            catch(ArithmeticException e)
+            {
+                System.out.println("Error found"+e.getMessage());
+            }
+            finally
+            {
+                System.out.println("Done .....");
+            }
+        }
+    }
+
+
